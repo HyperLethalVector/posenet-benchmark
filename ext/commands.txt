@@ -1,0 +1,13 @@
+
+
+#training model
+./caffe train -solver solver_posenet.prototxt -weights weights_kingscollege.caffemodel -gpu 0
+
+#compute image mean
+compute_image_mean input_lmdb_database/ output.binaryproto
+
+#test
+python test_posenet.py --model train_kingscollege.prototxt --weights _iter_4000.caffemodel --iter 16
+
+#getting data (run orbslam)
+rosrun ORB_SLAM2 Mono /home/damien-r/ORBvoc.bin /home/damien-r/Asus.yaml 
